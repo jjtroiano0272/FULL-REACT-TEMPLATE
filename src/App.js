@@ -1,25 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect, useContext } from 'react';
+import {
+  BrowserRouter as Router,
+  Route,
+  Routes,
+  Link,
+  useRouteMatch,
+  useParams,
+} from 'react-router-dom';
+import Navbar from './components/Navbar';
+import About from './components/About';
+import Home from './components/Home';
+import { ThemeContext } from './components/ThemeProvider';
 
-function App() {
+export default function App() {
+  const { darkMode, toggleDarkMode } = useContext(ThemeContext);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <Navbar />
+
+      {/* If you go to __ display __ */}
+      <Routes>
+        {/* <Route path='/' element={<Home />} /> */}
+        <Route path='/about' element={<About />} />
+        <Route path='/' element={<Home />} />
+      </Routes>
+    </Router>
   );
 }
-
-export default App;
