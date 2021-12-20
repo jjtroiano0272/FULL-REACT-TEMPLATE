@@ -9,6 +9,7 @@ export default function Home(props) {
         <h1>
           You're in: <strong>Home</strong>
         </h1>
+        <hr />
       </div>
       <Main />
       <Footer />

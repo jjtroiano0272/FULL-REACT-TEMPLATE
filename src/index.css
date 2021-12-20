@@ -45,6 +45,10 @@ code {
   background-size: contain;
 }
 
+.color-invert {
+  filter: invert();
+}
+
 input.search-dark {
   background-color: #161625;
   color: #c2c2da;

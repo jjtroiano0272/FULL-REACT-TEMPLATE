@@ -1,4 +1,5 @@
 import React, { useState, useContext, useRef } from 'react';
+
 import { Link, NavLink, Route, Routes } from 'react-router-dom';
 import { ThemeContext } from './ThemeProvider';
 import { useHotkeys } from 'react-hotkeys-hook';
@@ -33,7 +34,7 @@ export default function Navbar({ user }) {
       <div className='container'>
         <Link to='/' className='navbar-brand'>
           {/* This part only displays if you have text currently... */}
-          <img src={logo} alt='Brand logo' />
+          <img src={logo} alt='Brand logo' id='nav-logo' />
           HOME
         </Link>
         <button
@@ -55,7 +56,7 @@ export default function Navbar({ user }) {
               </Link>
             </li>
             <li className='nav-item'>
-              <Link to='/about' className='nav-link'>
+              <Link to='/my-profile' className='nav-link'>
                 My Profile
               </Link>
             </li>
@@ -76,9 +77,12 @@ export default function Navbar({ user }) {
               aria-label='Search'
             />
           </form>
+
           <button
             onClick={toggleDarkMode}
             className='btn btn-lg my-2 my-sm-0'
+            data-tip
+            data-for='lightDarkModeTip'
             type='checkbox'
           >
             {darkMode === true ? '🔆' : '🌙'}
