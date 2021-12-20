@@ -1,10 +1,10 @@
 import React, { useState, useContext, useRef } from 'react';
-
 import { Link, NavLink, Route, Routes } from 'react-router-dom';
 import { ThemeContext } from './ThemeProvider';
 import { useHotkeys } from 'react-hotkeys-hook';
 import { DarkModeSwitch } from 'react-toggle-dark-mode';
 import logo from '../image/react-logo.svg';
+import $ from 'jquery';
 
 export default function Navbar({ user }) {
   const { darkMode, toggleDarkMode } = useContext(ThemeContext);
@@ -35,7 +35,6 @@ export default function Navbar({ user }) {
         <Link to='/' className='navbar-brand'>
           {/* This part only displays if you have text currently... */}
           <img src={logo} alt='Brand logo' id='nav-logo' />
-          HOME
         </Link>
         <button
           className='navbar-toggler'
