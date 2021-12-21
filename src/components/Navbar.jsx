@@ -35,12 +35,7 @@ export default function Navbar({ user }) {
       <div className='container'>
         <NavLink to='/' className='navbar-brand'>
           <img src={logo} alt='Brand logo' id='nav-logo' />
-<<<<<<< HEAD
         </NavLink>
-=======
-          HOME
-        </Link>
->>>>>>> 314f9fd431020956cfd077a886d6e9935b3a403d
         <button
           className='navbar-toggler'
           type='button'
