@@ -1,14 +1,16 @@
 import React, { useState, useContext, useRef } from 'react';
 import { Link, NavLink, Route, Routes } from 'react-router-dom';
+import Tooltip from '@mui/material/Tooltip';
 import { ThemeContext } from './ThemeProvider';
 import { useHotkeys } from 'react-hotkeys-hook';
 import { DarkModeSwitch } from 'react-toggle-dark-mode';
 import logo from '../image/react-logo.svg';
+
 import $ from 'jquery';
 
 export default function Navbar({ user }) {
   const { darkMode, toggleDarkMode } = useContext(ThemeContext);
-  const inputRef = useRef();
+  const inputRef = useRef(0);
 
   // Switch theme
   useHotkeys(
@@ -21,9 +23,8 @@ export default function Navbar({ user }) {
 
   // Focus search box
   useHotkeys(
-    '/',
+    'cmd+k, ctrl+k',
     () => {
-      console.log("'/' pressed! Focusing search box...");
       inputRef.current.focus();
     },
     [inputRef]
@@ -32,10 +33,9 @@ export default function Navbar({ user }) {
   return (
     <nav className='navbar navbar-expand-lg navbar-light mb-4'>
       <div className='container'>
-        <Link to='/' className='navbar-brand'>
-          {/* This part only displays if you have text currently... */}
+        <NavLink to='/' className='navbar-brand'>
           <img src={logo} alt='Brand logo' id='nav-logo' />
-        </Link>
+        </NavLink>
         <button
           className='navbar-toggler'
           type='button'
@@ -77,15 +77,23 @@ export default function Navbar({ user }) {
             />
           </form>
 
-          <button
-            onClick={toggleDarkMode}
-            className='btn btn-lg my-2 my-sm-0'
-            data-tip
-            data-for='lightDarkModeTip'
-            type='checkbox'
+          <Tooltip
+            title={
+              !darkMode
+                ? 'Switch theme to dark mode'
+                : 'Switch theme to light mode'
+            }
           >
-            {darkMode === true ? '🔆' : '🌙'}
-          </button>
+            <button
+              onClick={toggleDarkMode}
+              className='btn btn-lg my-2 my-sm-0'
+              data-tip
+              data-for='lightDarkModeTip'
+              type='checkbox'
+            >
+              {darkMode === true ? '🔆' : '🌙'}
+            </button>
+          </Tooltip>
         </div>
       </div>
     </nav>

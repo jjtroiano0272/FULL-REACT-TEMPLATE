@@ -6,15 +6,6 @@ import './index.css';
 import reportWebVitals from './reportWebVitals';
 import $ from 'jquery';
 
-// When navbar is collapsed:
-//    div.navbar-collapse.collapse
-//    button.navbar-toggler.collapsed[aria-expanded='false']
-//
-// When navbar is open:
-//    div.navbar-collapse.collapse.show
-//    button.navbar-toggler.[aria-expanded='true']
-//
-// Used to close navbar when clicking outside
 $(document).click((event) => {
   // const isNavbarOpened = $('#navbar.navbar-collapse').hasClass('collapse show');
   const isNavbarOpened = $('div.navbar-collapse').hasClass('collapse show');
