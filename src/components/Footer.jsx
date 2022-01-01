@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 export default function Footer(props) {
   return (
-    <footer className='footer fixed-bottom'>
+    <footer className='mt-5'>
       <div className='container'>
         <div>
           <p>

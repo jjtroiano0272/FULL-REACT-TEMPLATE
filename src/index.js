@@ -9,7 +9,6 @@ import $ from 'jquery';
 $(document).click((event) => {
   // const isNavbarOpened = $('#navbar.navbar-collapse').hasClass('collapse show');
   const isNavbarOpened = $('div.navbar-collapse').hasClass('collapse show');
-  console.log('navbarOpen: ', isNavbarOpened);
 
   // this way, if the navbar is not opened, we don't perform unnecessary operations
   if (isNavbarOpened) {
