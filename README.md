@@ -1,9 +1,6 @@
 ## Additions (+)
 
-- [x] Tooltips
-- [O] <Link> with img enclosed will NOT render the image. What's the deal with this?
-- [ ] User login & mangement
-- [ ] A way of utilizing API data
+- [ ] Show user's high score and all-time high score data
 
 ## Things to look out for/Notes
 
