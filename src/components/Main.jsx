@@ -1,7 +1,6 @@
 import { nanoid } from 'nanoid';
 import React, { useState } from 'react';
 import Die from './Die';
-// error
 
 export default function Main(props) {
   const [diceValues, setDiceValues] = useState(allNewDice(10));
