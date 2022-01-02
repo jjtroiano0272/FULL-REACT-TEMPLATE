@@ -10,7 +10,7 @@ export default function Main(props) {
     const newDiceArr = [];
 
     function toggleHold() {
-      newDiceArr;
+      // newDiceArr;
     }
 
     // TODO: Can this be more elegant? Array.from
