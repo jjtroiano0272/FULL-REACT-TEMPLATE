@@ -36,6 +36,13 @@ export const ThemeProvider = ({ children }) => {
       document.querySelector('nav').classList.add('navbar-dark');
       document.querySelector('input.form-control').classList.add('search-dark');
       document.getElementById('nav-logo').classList.add('color-invert');
+
+      console.log(
+        // Returns NodeList of elements with -dark class
+        document.querySelectorAll('[class$="-dark"]')
+        // Then add, remove
+      );
+
       document.body.style.color = darkFontColor;
       document.body.style.backgroundColor = darkBgColor;
     }

@@ -1,83 +1,143 @@
 import { nanoid } from 'nanoid';
-import React, { useState } from 'react';
-import Die from './Die';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import Stack from '@mui/material/Stack';
+import Button from '@mui/material/Button';
+import Box from '@mui/material/Box';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
+import CardDeck from './CardDeck';
 
 export default function Main(props) {
-  const [diceValues, setDiceValues] = useState(allNewDice(10));
+  // TODO: Why the hell does setting it to an empty array cause it to function?
+  const [triviaData, setTriviaData] = useState([]);
+  const [takingQuiz, setTakingQuiz] = useState(false);
+  // Here we'll set numQuestions, difficulty,
+  const [userPreferences, setUserPreferences] = useState({
+    numQuestions: 10,
+    difficulty: 'hard',
+  });
+  // TODO: After loop, store userPreferences in localstorage and just re-read it, with an option to change this at the top.
+  const apiEndpoint = `https://opentdb.com/api.php?amount=${userPreferences.numQuestions}&difficulty=${userPreferences.difficulty}`;
 
-  function allNewDice(numDice) {
-    // return Array.from({ length: numDice }, () => Math.ceil(Math.random() * 6));
-    const newDiceArr = [];
-
-    function toggleHold() {
-      // newDiceArr;
+  useEffect(() => {
+    async function getData() {
+      await axios
+        .get(apiEndpoint)
+        .then(response => setTriviaData(response.data.results))
+        .catch(err => alert('Whoa! Something done goofed! ', err));
     }
 
-    // TODO: Can this be more elegant? Array.from
-    for (let i = 0; i < numDice; i++) {
-      newDiceArr.push({
-        id: nanoid(),
-        value: Math.ceil(Math.random() * 6),
-        isHeld: false,
-      });
-    }
+    getData();
 
-    return newDiceArr;
+    const myVar = localStorage.getItem('userPreferences');
+    // setUserPreferences(myVar);
+  }, [userPreferences]);
+
+  // Checking user settings
+  // useEffect(() => {
+  //   const myVar = localStorage.getItem('userPreferences');
+  //   setUserPreferences(myVar);
+  // }, [userPreferences]);
+
+  function handleSelect(id) {
+    return true;
   }
 
-  function toggleHold() {
-    console.log('die clicked');
+  async function renderChoices(data) {
+    const numChoices =
+      data.correct_answer.length + data.incorrect_answers.length;
+
+    return (
+      // Filter the keys by 'correct_answer' and 'incorrect_answers' to return one array with the choices back
+      // const result = words.filter(word => word.length > 6);
+
+      <div></div>
+    );
   }
+
+  const handleChangeQuestions = event => {
+    setUserPreferences({ numQuestions: event.target.value });
+    // (event.target.value);
+    console.log(
+      'Select box used. Set a user preference:\n\t',
+      userPreferences.numQuestions
+    );
+  };
+
+  const handleChangeDifficulty = event => {
+    setUserPreferences({ difficulty: event.target.value });
+  };
 
   return (
     <div className='container'>
-      <div className='container bg-light rounded text-dark text-center p-5'>
-        <h1>Tenzies</h1>
-        {/* map render 5 here */}
-        {/* TODO: This might cause some issues */}
-        {/* TODO: Offload this into a Dice.jsx component that captures Die.jsx and 
-                    takes numRows, numCols params, so that this below formatting will 
-                    automatically be determined  */}
-        <div className='row my-2'>
-          {allNewDice(5).map((die) => (
-            <div className='col' key={die.id}>
-              <button
-                className='btn btn-md btn-secondary'
-                onClick={() => {
-                  die.isHeld(!die.isHeld);
-                  console.log(die.isHeld);
-                }}
-              >
-                <Die value={JSON.stringify(die.value)} />
-              </button>
-            </div>
-          ))}
+      {/* Conditionally render gameLoop */}
+      {!takingQuiz ? (
+        <div>
+          {/* Dropdown menu */}
+          <FormControl sx={{ m: 1, minWidth: 150 }}>
+            <InputLabel id='demo-simple-select-label'>
+              Number of Qustions
+            </InputLabel>
+            <Select
+              labelId='demo-simple-select-label'
+              id='demo-simple-select'
+              value={userPreferences.numQuestions}
+              label='Number of Questions'
+              onChange={handleChangeQuestions}
+            >
+              {[...Array(30).keys()].map(num => (
+                <MenuItem value={num}>{num}</MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+
+          {/* Selecting Difficulty */}
+          <FormControl sx={{ m: 1, minWidth: 150 }}>
+            <InputLabel id='select-label-difficulty'>Difficulty</InputLabel>
+            <Select
+              labelId='select-label-difficulty'
+              id='select-difficulty'
+              value={userPreferences.difficulty}
+              label='Difficulty'
+              onChange={handleChangeDifficulty}
+            >
+              {['Easy', 'Normal', 'Hard'].map(choice => (
+                <MenuItem value={choice.toLowerCase()}>{choice}</MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+
+          <Button
+            style={{ marginTop: '5rem' }}
+            variant='contained'
+            size='large'
+            fullWidth
+            onClick={() => setTakingQuiz(true)}
+          >
+            START
+          </Button>
         </div>
-        <div className='row my-2'>
-          {allNewDice(5).map((die) => (
-            <div className='col' key={die.id}>
-              <button
-                className='btn btn-md btn-secondary'
-                onClick={() => toggleHold()}
-              >
-                <Die value={die.value} />
-              </button>
-            </div>
-          ))}
+      ) : (
+        // render all the stuff we've been using
+        <div>
+          <CardDeck data={triviaData} />
+          <Box textAlign='center'>
+            <Button
+              className='text-muted mt-2'
+              onClick={() => setTakingQuiz(false)}
+            >
+              RESET
+            </Button>
+          </Box>
         </div>
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum
-          reiciendis modi ut vero repudiandae facere in eligendi officiis
-          expedita velit, eos saepe voluptate tempora iure voluptatibus earum
-          natus repellendus temporibus.
-        </p>
-        <button
-          className='btn btn-primary btn-fluid'
-          onClick={() => setDiceValues(allNewDice(10))}
-        >
-          ROLL
-        </button>
-      </div>
+      )}
+
+      {/* TODO: probably offload this */}
+      {/* TODO: Might need a toggleSelect prop */}
+      {/* TODO: Also might want to just offload this all into a renderSelections function */}
     </div>
   );
 }
