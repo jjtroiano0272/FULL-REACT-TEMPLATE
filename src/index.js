@@ -2,9 +2,10 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 import { ThemeProvider } from './components/ThemeProvider';
-import './index.css';
 import reportWebVitals from './reportWebVitals';
 import $ from 'jquery';
+import './index.css';
+import './components/common/rainbow-spin-loader.css';
 
 $(document).click(event => {
   // const isNavbarOpened = $('#navbar.navbar-collapse').hasClass('collapse show');
