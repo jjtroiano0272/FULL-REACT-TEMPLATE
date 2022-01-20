@@ -6,7 +6,7 @@ import './index.css';
 import reportWebVitals from './reportWebVitals';
 import $ from 'jquery';
 
-$(document).click((event) => {
+$(document).click(event => {
   // const isNavbarOpened = $('#navbar.navbar-collapse').hasClass('collapse show');
   const isNavbarOpened = $('div.navbar-collapse').hasClass('collapse show');
 
