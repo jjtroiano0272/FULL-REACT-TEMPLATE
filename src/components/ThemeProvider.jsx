@@ -20,7 +20,6 @@ export const ThemeProvider = ({ children }) => {
 
   useEffect(() => {
     const isDark = localStorage.getItem('dark') === 'true';
-    console.log('mounted. isDark: ', isDark);
     setDarkMode(isDark);
 
     // TODO: This would be lovely with a more elegant approach!

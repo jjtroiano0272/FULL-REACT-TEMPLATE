@@ -1,11 +1,17 @@
 import React, { useState, useContext, useRef } from 'react';
 import { Link, NavLink, Route, Routes } from 'react-router-dom';
+import { styled } from '@mui/material/styles';
 import Tooltip from '@mui/material/Tooltip';
+import FormGroup from '@mui/material/FormGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Switch from '@mui/material/Switch';
+import Stack from '@mui/material/Stack';
+import Typography from '@mui/material/Typography';
+import { MaterialUISwitch } from './common/Switch';
 import { ThemeContext } from './ThemeProvider';
 import { useHotkeys } from 'react-hotkeys-hook';
 import { DarkModeSwitch } from 'react-toggle-dark-mode';
 import logo from '../image/react-logo.svg';
-
 import $ from 'jquery';
 
 export default function Navbar({ user }) {
@@ -84,15 +90,18 @@ export default function Navbar({ user }) {
                 : 'Switch theme to light mode'
             }
           >
-            <button
-              onClick={toggleDarkMode}
-              className='btn btn-lg my-2 my-sm-0'
-              data-tip
-              data-for='lightDarkModeTip'
-              type='checkbox'
-            >
-              {darkMode === true ? '🔆' : '🌙'}
-            </button>
+            <FormGroup>
+              <FormControlLabel
+                className='mx-2'
+                control={<MaterialUISwitch sx={{ m: 1 }} defaultChecked />}
+                label=''
+                onClick={toggleDarkMode}
+                data-tip
+                data-for='lightDarkModeTip'
+                type='checkbox'
+              />
+            </FormGroup>
+            {/* {darkMode === true ? '🔆' : '🌙'} */}
           </Tooltip>
         </div>
       </div>
