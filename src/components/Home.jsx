@@ -5,7 +5,6 @@ import Main from './Main';
 export default function Home(props) {
   return (
     <>
-      <div className='container'></div>
       <Main />
       <Footer />
     </>
