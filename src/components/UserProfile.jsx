@@ -36,9 +36,9 @@ export default function UserProfile() {
   }
 
   return (
-    isAuthenticated && (
-      <div className='container'>
-        <div>
+    <div className='container'>
+      {isAuthenticated ? (
+        <>
           <img src={user.picture} alt={user.name} />
           <JSONPretty data={user.name} />
           <h2>{user.name}</h2>
@@ -49,8 +49,10 @@ export default function UserProfile() {
           >
             Gemme out!
           </Button>
-        </div>
-      </div>
-    )
+        </>
+      ) : (
+        <p className='lead'>You're not logged in!</p>
+      )}
+    </div>
   );
 }
