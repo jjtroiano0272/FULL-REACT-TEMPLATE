@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Auth0Provider } from '@auth0/auth0-react';
 import App from './App';
 import { ThemeProvider } from './components/ThemeProvider';
 import reportWebVitals from './reportWebVitals';
@@ -7,6 +8,7 @@ import $ from 'jquery';
 import './index.css';
 import './components/common/rainbow-spin-loader.css';
 
+// Collapses Navbar when you click outside its boundaries.
 $(document).click(event => {
   // const isNavbarOpened = $('#navbar.navbar-collapse').hasClass('collapse show');
   const isNavbarOpened = $('div.navbar-collapse').hasClass('collapse show');
@@ -22,10 +24,22 @@ $(document).click(event => {
   }
 });
 
+// Coding these as env variables doesn't work. You have to put the variable in here.
+// const domain = process.env.REACT_APP_AUTH0_DOMAIN;
+// const clientId = process.env.REACT_APP_AUTH0_CLIENTID;
+const domain = 'dev-b70h-mzq.us.auth0.com';
+const clientId = 'aPdJ4ZzQP40iUvtMR2CSC3siJfAPd8tz';
+
 ReactDOM.render(
-  <ThemeProvider>
-    <App />
-  </ThemeProvider>,
+  <Auth0Provider
+    domain={domain}
+    clientId={clientId}
+    redirectUri={window.location.origin}
+  >
+    <ThemeProvider>
+      <App />
+    </ThemeProvider>
+  </Auth0Provider>,
   document.getElementById('root')
 );
 

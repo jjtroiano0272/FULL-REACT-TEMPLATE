@@ -9,11 +9,11 @@ import {
   useParams,
 } from 'react-router-dom';
 import { nanoid } from 'nanoid';
+import ReactTooltip from 'react-tooltip';
 import Navbar from './components/Navbar';
 import About from './components/About';
 import Home from './components/Home';
 import { ThemeContext } from './components/ThemeProvider';
-import ReactTooltip from 'react-tooltip';
 import UserProfile from './components/UserProfile';
 
 export default function App() {

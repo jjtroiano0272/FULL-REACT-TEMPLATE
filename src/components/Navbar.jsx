@@ -14,9 +14,16 @@ import logo from '../image/react-logo.svg';
 import { MaterialUISwitch } from './common/Switch';
 import $ from 'jquery';
 
-export default function Navbar({ user }) {
+import LoginButton from './common/LoginButton';
+import LogoutButton from './common/LogoutButton';
+import UserProfile from './UserProfile';
+import { useAuth0 } from '@auth0/auth0-react';
+
+export default function Navbar() {
   const { darkMode, toggleDarkMode } = useContext(ThemeContext);
   const inputRef = useRef(0);
+  const { logout, loginWithRedirect, isAuthenticated, user, isLoading } =
+    useAuth0();
 
   // Switch theme
   useHotkeys(
@@ -53,16 +60,26 @@ export default function Navbar({ user }) {
         >
           <span className='navbar-toggler-icon'></span>
         </button>
+
         <div className='collapse navbar-collapse' id='navbarSupportedContent'>
           <ul className='navbar-nav mr-auto'>
+            {!isAuthenticated ? (
+              <li className='nav-item' onClick={() => loginWithRedirect()}>
+                <Link to='' className='nav-link'>
+                  Login
+                </Link>
+              </li>
+            ) : (
+              <li className='nav-item'>
+                <Link to='/my-profile' className='nav-link'>
+                  My Profile: <strong>{user.name}</strong>
+                </Link>
+              </li>
+            )}
+
             <li className='nav-item'>
               <Link to='/about' className='nav-link'>
                 About
-              </Link>
-            </li>
-            <li className='nav-item'>
-              <Link to='/my-profile' className='nav-link'>
-                My Profile
               </Link>
             </li>
 
