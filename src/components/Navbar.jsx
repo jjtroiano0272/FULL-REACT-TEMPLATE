@@ -72,7 +72,7 @@ export default function Navbar() {
             ) : (
               <li className='nav-item'>
                 <Link to='/my-profile' className='nav-link'>
-                  My Profile: <strong>{user.name}</strong>
+                  My Profile: <strong>{user.name.substring(0, user.name.indexOf('@'))}</strong>
                 </Link>
               </li>
             )}

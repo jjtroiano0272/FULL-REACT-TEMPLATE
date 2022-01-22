@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import ReactDOM from 'react-dom';
 import {
-  BrowserRouter as Router,
   Route,
   Routes,
   Link,
@@ -22,16 +21,15 @@ export default function App() {
   const [data, setData] = useState();
 
   return (
-    <Router>
+    <>
       <Navbar />
 
       {/* If you go to __ display __ */}
       <Routes>
-        {/* <Route path='/' element={<Home />} /> */}
         <Route path='/' element={<Home />} />
         <Route path='/about' element={<About />} />
         <Route path='/my-profile' element={<UserProfile />} />
       </Routes>
-    </Router>
+    </>
   );
 }

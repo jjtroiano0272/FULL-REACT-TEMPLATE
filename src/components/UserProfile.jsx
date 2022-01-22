@@ -39,9 +39,8 @@ export default function UserProfile() {
     <div className='container'>
       {isAuthenticated ? (
         <>
-          <img src={user.picture} alt={user.name} />
-          <JSONPretty data={user.name} />
-          <h2>{user.name}</h2>
+          <img src={user.picture} className='rounded' alt={user.name} />
+          <h2>{user.name.substring(0, user.name.indexOf('@'))}</h2>
           <p>{user.email}</p>
           <Button
             variant='contained'
