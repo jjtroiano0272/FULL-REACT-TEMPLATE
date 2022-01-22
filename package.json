@@ -1,6 +1,6 @@
 {
-  "name": "react-tenzies",
-  "version": "0.1.0",
+  "name": "new-react-app",
+  "version": "0.0.1",
   "private": true,
   "dependencies": {
     "@auth0/auth0-react": "^1.9.0",
@@ -35,10 +35,12 @@
     "deploy": "gh-pages -d build"
   },
   "prettier": {
-    "bracketSameLine:": true,
+    "bracketSameLine:": false,
     "arrowParens": "avoid",
+    "semi": true,
     "singleQuote": true,
-    "jsxSingleQuote": true
+    "jsxSingleQuote": true,
+    "bracketSpacing": true
   },
   "eslintConfig": {
     "extends": [
