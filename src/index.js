@@ -1,13 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Auth0Provider } from '@auth0/auth0-react';
+import { BrowserRouter as Router } from 'react-router-dom';
+import $ from 'jquery';
 import App from './App';
 import { ThemeProvider } from './components/ThemeProvider';
-import reportWebVitals from './reportWebVitals';
-import $ from 'jquery';
+import Auth0ProviderWithNavigate from './auth/auth0-provider-with-navigate';
 import './index.css';
 import './components/common/rainbow-spin-loader.css';
-import { BrowserRouter as Router } from 'react-router-dom';
+import reportWebVitals from './reportWebVitals';
+
+import { getConfig } from './config';
 
 // Collapses Navbar when you click outside its boundaries.
 $(document).click(event => {
@@ -25,24 +27,22 @@ $(document).click(event => {
   }
 });
 
-// Coding these as env variables doesn't work. You have to put the variable in here.
-// const domain = process.env.REACT_APP_AUTH0_DOMAIN;
-// const clientId = process.env.REACT_APP_AUTH0_CLIENTID;
-// TODO: Learn how to send store this in an .env var or similar
-const domain = 'dev-b70h-mzq.us.auth0.com';
-const clientId = 'aPdJ4ZzQP40iUvtMR2CSC3siJfAPd8tz';
+const config = getConfig();
+const providerConfig = {
+  domain: config.domain,
+  clientId: config.clientId,
+  ...(config.audience ? { audience: config.audience } : null),
+  redirectUri: window.location.origin,
+  onRedirectCallback,
+};
 
 ReactDOM.render(
   <Router>
-    <Auth0Provider
-      domain={domain}
-      clientId={clientId}
-      redirectUri={window.location.origin}
-    >
+    <Auth0ProviderWithNavigate {...providerConfig}>
       <ThemeProvider>
         <App />
       </ThemeProvider>
-    </Auth0Provider>
+    </Auth0ProviderWithNavigate>
   </Router>,
   document.getElementById('root')
 );
