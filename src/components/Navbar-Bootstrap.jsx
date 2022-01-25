@@ -3,27 +3,42 @@ import { Link, NavLink, Route, Routes } from 'react-router-dom';
 import { ThemeContext } from './ThemeProvider';
 import { useHotkeys } from 'react-hotkeys-hook';
 import { DarkModeSwitch } from 'react-toggle-dark-mode';
-import Tooltip from '@mui/material/Tooltip';
+import logo from '../image/react-logo.svg';
+import { MaterialUISwitch } from './common/Switch';
+import $ from 'jquery';
+import LoginButton from './common/LoginButton';
+import LogoutButton from './common/LogoutButton';
+import UserProfile from './UserProfile';
+import { useAuth0 } from '@auth0/auth0-react';
 import { styled } from '@mui/material/styles';
+import Tooltip from '@mui/material/Tooltip';
 import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Switch from '@mui/material/Switch';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
-import logo from '../image/react-logo.svg';
-import { MaterialUISwitch } from './common/Switch';
-import $ from 'jquery';
 
-import LoginButton from './common/LoginButton';
-import LogoutButton from './common/LogoutButton';
-import UserProfile from './UserProfile';
-import { useAuth0 } from '@auth0/auth0-react';
+
+import AppBar from '@mui/material/AppBar';
+import Box from '@mui/material/Box';
+import Toolbar from '@mui/material/Toolbar';
+import IconButton from '@mui/material/IconButton';
+import Menu from '@mui/material/Menu';
+import Container from '@mui/material/Container';
+import Avatar from '@mui/material/Avatar';
+import Button from '@mui/material/Button';
+import MenuItem from '@mui/material/MenuItem';
+import MenuIcon from '@mui/icons-material/Menu';
 
 export default function Navbar() {
   const { darkMode, toggleDarkMode } = useContext(ThemeContext);
   const inputRef = useRef(0);
   const { logout, loginWithRedirect, isAuthenticated, user, isLoading } =
     useAuth0();
+
+  const pages = ['Products', 'Pricing', 'Blog'];
+  const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+
 
   // Switch theme
   useHotkeys(

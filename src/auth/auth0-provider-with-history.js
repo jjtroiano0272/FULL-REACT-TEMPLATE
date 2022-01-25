@@ -2,7 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Auth0Provider } from '@auth0/auth0-react';
 
-const Auth0ProviderWithNavigate = ({ children }) => {
+const Auth0ProviderWithHistory = ({ children }) => {
   // Coding these as env variables doesn't work. You have to put the variable in here.
   // TODO: Learn how to send store this in an .env var or similar
   // const domain = process.env.REACT_APP_AUTH0_DOMAIN;
@@ -28,4 +28,4 @@ const Auth0ProviderWithNavigate = ({ children }) => {
   );
 };
 
-export default Auth0ProviderWithNavigate;
+export default Auth0ProviderWithHistory;

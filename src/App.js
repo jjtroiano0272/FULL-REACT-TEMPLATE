@@ -9,7 +9,7 @@ import {
 } from 'react-router-dom';
 import { nanoid } from 'nanoid';
 import ReactTooltip from 'react-tooltip';
-import Navbar from './components/Navbar';
+import Navbar from './components/Navbar-MUI';
 import About from './components/About';
 import Home from './components/Home';
 import { ThemeContext } from './components/ThemeProvider';
