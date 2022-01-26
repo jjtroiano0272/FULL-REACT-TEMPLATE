@@ -2,7 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Auth0Provider } from '@auth0/auth0-react';
 import App from './App';
-import { ThemeProvider } from './components/ThemeProvider';
 import reportWebVitals from './reportWebVitals';
 import $ from 'jquery';
 import './index.css';
@@ -39,9 +38,7 @@ ReactDOM.render(
       clientId={clientId}
       redirectUri={window.location.origin}
     >
-      <ThemeProvider>
-        <App />
-      </ThemeProvider>
+      <App />
     </Auth0Provider>
   </Router>,
   document.getElementById('root')

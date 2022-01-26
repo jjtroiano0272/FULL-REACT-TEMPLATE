@@ -82,3 +82,11 @@ input.search-dark:focus {
   width: 2rem;
   height: auto;
 }
+
+.mui-nav-link {
+  text-decoration: none;
+  color: inherit;
+}
+.mui-nav-link:hover {
+  color: inherit;
+}
