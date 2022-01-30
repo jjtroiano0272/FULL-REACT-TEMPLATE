@@ -30,6 +30,7 @@ import MenuItem from '@mui/material/MenuItem';
 import MenuIcon from '@mui/icons-material/Menu';
 import { makeStyles } from '@material-ui/core/styles';
 import { red } from '@material-ui/core/colors';
+import * as CryptoJS from 'crypto-js';
 
 export default function Navbar({ toggleDark, setToggleDark }) {
   // const { darkMode, toggleDarkMode } = useContext(ThemeContext);
@@ -170,31 +171,35 @@ export default function Navbar({ toggleDark, setToggleDark }) {
 
   const handleModeChange = () => {
     setToggleDark(!toggleDark);
+    console.log(`toggleDark is now ${!toggleDark}`);
   };
 
   const useStyles = makeStyles(theme => ({
     // Styling material components
-    root: {
-      width: '100%',
-      height: '100vh',
-      backgroundColor: theme.palette.background.default,
-      [theme.breakpoints.down('xs')]: {
-        paddingTop: theme.spacing(2),
-      },
-    },
-    media: {
-      height: 56,
-      paddingTop: '56.25%', // 16:9
-    },
-    avatar: {
-      backgroundColor: red[500],
-    },
+    // root: {
+    //   width: '100%',
+    //   height: '100vh',
+    //   backgroundColor: theme.palette.background.default,
+    //   [theme.breakpoints.down('xs')]: {
+    //     paddingTop: theme.spacing(2),
+    //   },
+    // },
+    // media: {
+    //   height: 56,
+    //   paddingTop: '56.25%', // 16:9
+    // },
+    // avatar: {
+    //   backgroundColor: red[500],
+    // },
   }));
 
   const classes = useStyles();
 
+  const emailHash =
+    isAuthenticated && CryptoJS.MD5(user.email).toString().trim().toLowerCase();
+
   return (
-    <AppBar position='static' className='mb-4'>
+    <AppBar position='static' className='mb-4' color='primary'>
       <Container maxWidth='xl'>
         <Toolbar disableGutters>
           <Typography
@@ -271,13 +276,17 @@ export default function Navbar({ toggleDark, setToggleDark }) {
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                 {/* TODO: Some sort of ... filling up loader */}
                 <Avatar
+                  src={
+                    isAuthenticated
+                      ? `https://www.gravatar.com/avatar/${emailHash}?d=identicon`
+                      : null
+                  }
                   alt={
                     user &&
                     user.name
                       .toLocaleUpperCase()
                       .substring(0, user.name.indexOf('@'))
                   }
-                  src='/static/images/avatar/2.jpg'
                 />
               </IconButton>
             </Tooltip>

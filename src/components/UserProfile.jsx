@@ -4,36 +4,13 @@ import './common/rainbow-spin-loader.css';
 import JSONPretty from 'react-json-pretty';
 import Button from '@mui/material/Button';
 import * as CryptoJS from 'crypto-js';
+import rainbowSpinLoader from './common/rainbowSpinLoader';
 
 export default function UserProfile() {
   const { user, isAuthenticated, isLoading, logout } = useAuth0();
 
-  function loader() {
-    return (
-      <div className='loader'>
-        <div className='loader-inner'>
-          <div className='loader-line-wrap'>
-            <div className='loader-line'></div>
-          </div>
-          <div className='loader-line-wrap'>
-            <div className='loader-line'></div>
-          </div>
-          <div className='loader-line-wrap'>
-            <div className='loader-line'></div>
-          </div>
-          <div className='loader-line-wrap'>
-            <div className='loader-line'></div>
-          </div>
-          <div className='loader-line-wrap'>
-            <div className='loader-line'></div>
-          </div>
-        </div>
-      </div>
-    );
-  }
-
   if (isLoading) {
-    return loader();
+    return rainbowSpinLoader();
   }
 
   // You'll use crypto.MD5('StringToHash')

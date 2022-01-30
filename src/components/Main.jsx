@@ -42,10 +42,15 @@ export default function Main(props) {
       <h1>First Time Here?</h1>
       <ul>
         <li>
-          Change the repo this pushes to! Otherwise you'll be pushing changes <strong>to the template!!!</strong>
+          Change the repo this pushes to! Otherwise you'll be pushing changes{' '}
+          <strong>to the template!!!</strong>
         </li>
-        <li>Change the name of the app in <code>package.json</code></li>
-        <li>Run <code>npm i</code> first</li>
+        <li>
+          Change the name of the app in <code>package.json</code>
+        </li>
+        <li>
+          Run <code>npm i</code> first
+        </li>
       </ul>
     </div>
   );
